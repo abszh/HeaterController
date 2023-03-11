@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "documentationRules": {
+      "companyName": "Abbas Shahzadeh",
+      "copyrightText": "Copyright (c) {companyName}. All rights reserved.",
+      "headerDecoration": "-----------------------------------------------------------------------",
+      "documentInterfaces": false,
+      "documentExposedElements": false,
+      "documentInternalElements": false
+    }
+  }
+}

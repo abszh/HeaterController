@@ -1,0 +1,7 @@
+/.vs
+/HeaterController/obj
+/HeaterController/bin
+/HeaterControllerTests/obj
+/HeaterControllerTests/bin
+/HeaterController/*.bak
+/HeaterController/Properties/launchSettings.json
