@@ -22,7 +22,7 @@ public class HeaterLogicService : IHeaterLogicService
 
         if (relayStatus == RelayStatus.Off &&
             timeSinceLastChange >= settings.MinOffTime &&
-            temperature <= settings.TurnOffTemperature)
+            temperature <= settings.TurnOnTemperature)
         {
             return HeaterActions.TurnOn;
         }

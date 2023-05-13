@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 public class HeaterController : IHeaterController
 {
     private const int DelayIfOnline = 100;
-    private const int DelayIfOffline = 10000;
+    private const int DelayIfOffline = 120000;
 
     private readonly ILogger<HeaterController> logger;
     private readonly IRelayService relayService;
@@ -81,7 +81,7 @@ public class HeaterController : IHeaterController
             }
             else if (heaterAction == HeaterActions.TurnOff)
             {
-                await this.relayService.TurnOnAsync(cancellationToken);
+                await this.relayService.TurnOffAsync(cancellationToken);
                 this.logger.LogInformation($"Turned the relay off. Temperature is {this.Temperature}, time since last change {timeSinceLastChange}");
                 this.lastChangeTime = this.timeService.Now;
             }
