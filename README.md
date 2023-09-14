@@ -10,9 +10,9 @@ Some of best practices in software development are demonstrated in this code inc
 
 ## Motivation
 
-The problem that I had was that in my home, the control unit of the gas heater is in living room. At night there is no one in the living room though. I can save a lot of energy if I close the heater vents in the living room. However by doing so, the heater would never turn off.
+In my home, the control unit of the gas heater is in living room. At night there is no one in the living room. I can save a lot of energy if I close the heater vents in the living room. However by doing so, the heater would never turn off.
 
-To solve this issue, in my home I have put a Shelly temperature sensor in the kids bedroom. I have also made some changes to the heater so that i‌t can be turned on and off using a Shelly relay. At night I run this application so that the heater is turned on and off based on the temperature of the bedroom and not the living room
+To solve this issue, I have put a Shelly temperature sensor in the kids bedroom. I have also made some changes to the heater so that i‌t can be turned on and off using a Shelly relay. At night I run this application so that the heater is turned on and off based on the temperature of the kids' bedroom and not the living room
 
 ## How to use
 
