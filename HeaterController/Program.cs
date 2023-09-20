@@ -18,6 +18,14 @@ using NLog.Extensions.Logging;
 
 internal class Program
 {
+    private enum ExitCode : int
+    {
+        Success = 0,
+        InvalidArguments = 1,
+        InvalidRelayIpAddress = 2,
+        InvalidSensorIpAddress = 3,
+    }
+
     private static readonly ManualResetEvent ShutDownEvent = new(false);
     private static readonly CancellationTokenSource CancellationTokenSource = new();
     private static Microsoft.Extensions.Logging.ILogger? logger;
@@ -26,34 +34,31 @@ internal class Program
         Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
         + @"\HeaterController\ControllerLogs.log";
 
-    private static void PrintUsageAndExit(string? message = null)
+    private static void PrintUsage()
     {
-        if (message is not null)
-        {
-            Console.WriteLine(message);
-        }
-
         Console.WriteLine("Usage: HeaterController <relayIpAddress> <sensorIpAddress>");
-        Environment.Exit(-1);
     }
 
-    private static async Task Main(string[] args)
+    private static async Task<int> Main(string[] args)
     {
         if (args.Length != 2)
         {
-            PrintUsageAndExit();
+            PrintUsage();
+            return (int)ExitCode.InvalidArguments;
         }
 
         var relayIpAddress = args[0];
         if (!IPAddress.TryParse(relayIpAddress, out _))
         {
-            PrintUsageAndExit($"Invalid IP specified for the relay: {relayIpAddress}");
+            Console.WriteLine($"Invalid IP specified for the relay: {relayIpAddress}");
+            return (int)ExitCode.InvalidRelayIpAddress;
         }
 
         var sensorIpAddress = args[1];
         if (!IPAddress.TryParse(sensorIpAddress, out _))
         {
-            PrintUsageAndExit($"Invalid IP specified for the sensor: {sensorIpAddress}");
+            Console.WriteLine($"Invalid IP specified for the sensor: {sensorIpAddress}");
+            return (int)ExitCode.InvalidSensorIpAddress;
         }
 
         Console.CancelKeyPress += Console_CancelKeyPress;
@@ -106,6 +111,7 @@ internal class Program
         httpClient.Dispose();
         logger.LogInformation("Exiting the program.");
         ShutDownEvent.Set();
+        return (int)ExitCode.Success;
     }
 
     private static void CurrentDomain_ProcessExit(object? sender, EventArgs e)
